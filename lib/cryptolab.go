@@ -205,6 +205,36 @@ func EncodeWithRepeatingXOR(key string, plainText string) (string, error) {
 }
 
 //
+// Break repeating-key XOR
+
+// Calculate the ammount of diferent bits
+func HammingDistance(a, b []byte) (int, error) {
+	if len(a) != len(b) {
+		return 0, errors.New("Byte arrays are not of the same length")
+	}
+
+	diff := 0
+
+	for i := 0; i < len(a); i++ {
+		ba := a[i]
+		bb := b[i]
+
+		// Go through every bit of a byte
+		var mask byte
+		for j := 0; j < 8; j++ {
+			mask = byte(1 << uint(j))
+			if (ba & mask) != (bb & mask) {
+				diff++
+			}
+		}
+	}
+
+	return diff, nil
+}
+
+
+
+//
 // Aux
 
 func checkError(err error) {
