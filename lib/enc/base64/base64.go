@@ -125,7 +125,7 @@ func Decode(dst, src []byte) (n int, err error) {
 func checkForQuantum(dst, src []byte) (n, srcI int, err error){
 	// Convert 4 char in 64 to 3 bytes
 	var dstBytes [4]byte
-	dlen := 3
+	dlen := 4
 	for i := 0; i < len(dstBytes); i++ {
 		// needed more char to be able to decode
 		if(srcI == len(src)){
@@ -186,7 +186,6 @@ func checkForQuantum(dst, src []byte) (n, srcI int, err error){
 		dlen = i
 		break
 	}
-
 	val := uint(dstBytes[0])<<18 | uint(dstBytes[1])<<12 | uint(dstBytes[2])<<6 | uint(dstBytes[3])
 	dstBytes[0] = byte(val>>16&0xFF)
 	dstBytes[1] = byte(val>>8&0xFF)
@@ -203,7 +202,7 @@ func checkForQuantum(dst, src []byte) (n, srcI int, err error){
 		dst[0] = dstBytes[0]
 	}
 
-	return dlen, srcI, nil
+	return dlen - 1, srcI, nil
 }
 
 func convertB64Block(dst, src []byte) bool {
