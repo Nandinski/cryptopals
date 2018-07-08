@@ -2,7 +2,6 @@ package main
 
 import (
 	"Cryptopals/lib"
-	// "Cryptopals/lib/enc/base64"
 	"fmt"
 )
 
@@ -21,15 +20,11 @@ Here's how:
 	  Normalize this result by dividing by KEYSIZE.
 */
 func main() {
-	cypheredText, err := lib.ReadBase64FromFile("6.txt")
-	fmt.Println()
-	fmt.Println(err)
+	cypheredText, _ := lib.ReadBase64FromFile("6.txt")
 
-	fmt.Println(len(cypheredText))
+	decipheredText, key := lib.BreakRepeatingXORCypher(cypheredText)
 
-	// Try to find the key length
-	// for i := 2; i < 40; i++ {
-	//
-	// }
-
+	fmt.Printf("Key: %s\n", key)
+	fmt.Println("")
+	fmt.Printf("%s", decipheredText)
 }
