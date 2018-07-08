@@ -111,7 +111,7 @@ func xorByByte(key byte, b []byte) string {
 	return string(decipheredText)
 }
 
-// EnglishFrequencyTable contains the frequency of each letter commonly used in english
+// EnglishFrequencyTable contains the frequency of each letter commonly used in english text
 var EnglishFrequencyTable = map[rune]float64{
 	' ': 0.1918182, // This was the key to break it!
 	'a': 0.0651738,
